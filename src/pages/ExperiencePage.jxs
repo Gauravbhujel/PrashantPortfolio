@@ -1,0 +1,133 @@
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  ClockIcon,
+  CheckCircle2Icon,
+  HeartIcon,
+  UtensilsIcon,
+} from "lucide-react";
+import PageTransition from "../components/PageTransition";
+
+const experiences = [
+  {
+    id: 1,
+    title: "Food Service Professional",
+    duration: "3+ Years Experience",
+    icon: UtensilsIcon,
+    responsibilities: [
+      "Delivering excellent customer service in fast-paced environments",
+      "Food preparation and maintaining quality standards",
+      "Team collaboration during busy hours",
+      "Following food safety and hygiene rules",
+    ],
+  },
+  {
+    id: 2,
+    title: "Long-Term Care (LTC) Support",
+    duration: "1+ Year Experience",
+    icon: HeartIcon,
+    responsibilities: [
+      "Helping residents with daily activities",
+      "Maintaining a clean and safe environment",
+      "Communicating with healthcare staff",
+      "Showing empathy and problem-solving skills",
+    ],
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
+const ExperiencePage = () => {
+  return (
+    <PageTransition>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <motion.h1
+            className="text-4xl md:text-5xl font-bold mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            Work Experience
+          </motion.h1>
+
+          <motion.div
+            className="w-24 h-1 bg-orange-500 mx-auto"
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: 96 }}
+            transition={{ delay: 0.2 }}
+          />
+        </div>
+
+        {/* Cards */}
+        <motion.div
+          className="grid md:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {experiences.map((exp) => (
+            <motion.div
+              key={exp.id}
+              variants={itemVariants}
+              className="bg-white rounded-xl p-8 shadow-sm border hover:shadow-lg transition group"
+            >
+              
+              {/* Top */}
+              <div className="flex justify-between mb-6">
+
+                <div className="p-3 bg-black text-orange-500 rounded-lg group-hover:bg-orange-500 group-hover:text-black transition">
+                  <exp.icon size={24} />
+                </div>
+
+                <div className="flex items-center text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                  <ClockIcon size={16} className="mr-1" />
+                  {exp.duration}
+                </div>
+
+              </div>
+
+              {/* Title */}
+              <h3 className="text-2xl font-bold mb-6">
+                {exp.title}
+              </h3>
+
+              {/* List */}
+              <ul className="space-y-4">
+                {exp.responsibilities.map((item, index) => (
+                  <li key={index} className="flex">
+                    <CheckCircle2Icon
+                      size={20}
+                      className="text-orange-500 mr-3 mt-1"
+                    />
+                    <span className="text-gray-600">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+            </motion.div>
+          ))}
+        </motion.div>
+
+      </div>
+    </PageTransition>
+  );
+};
+
+export default ExperiencePage;

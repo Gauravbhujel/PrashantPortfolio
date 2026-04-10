@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import PageTransition from "../components/PageTransition";
 
 const skills = [
   { name: "Customer Service", level: 95 },
@@ -20,110 +19,107 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
-const SkillsPage = () => {
+const SkillsSection = () => {
   return (
-    <PageTransition>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        {/* Heading */}
-        <div className="text-center mb-16">
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold mb-4"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            Professional Skills
-          </motion.h1>
+    <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
+      {/* Heading */}
+      <div className="text-center mb-20">
+        <motion.div 
+          className="flex items-center gap-4 justify-center text-accent/80 mb-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="w-8 h-[1px] bg-accent" />
+          <span className="text-xs font-semibold uppercase tracking-[0.3em]">Capabilities</span>
+          <div className="w-8 h-[1px] bg-accent" />
+        </motion.div>
+        
+        <motion.h2
+          className="text-5xl md:text-6xl font-serif italic text-dark tracking-tight"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Professional <span className="not-italic font-bold">Skills</span>
+        </motion.h2>
+      </div>
 
-          <motion.div
-            className="w-24 h-1 bg-orange-500 mx-auto"
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: 96 }}
-            transition={{ delay: 0.2 }}
-          />
-
-          <motion.p
-            className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            A mix of interpersonal and practical skills gained through
-            real-world experience.
-          </motion.p>
-        </div>
-
-        {/* Skills Bars */}
+      {/* Skills Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <motion.div
-          className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border"
+          className="space-y-10"
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-            {skills.map((skill, index) => (
-              <motion.div key={skill.name} variants={itemVariants}>
-                <div className="flex justify-between mb-2">
-                  <span className="font-semibold">{skill.name}</span>
-                  <span className="text-orange-500 font-medium">
-                    {skill.level}%
-                  </span>
-                </div>
+          {skills.map((skill, index) => (
+            <motion.div key={skill.name} variants={itemVariants}>
+              <div className="flex justify-between items-end mb-3">
+                <span className="text-sm font-bold uppercase tracking-widest text-dark">{skill.name}</span>
+                <span className="text-accent font-serif italic text-lg">
+                  {skill.level}%
+                </span>
+              </div>
 
-                <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-black"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.level}%` }}
-                    transition={{
-                      duration: 1,
-                      delay: 0.5 + index * 0.1,
-                    }}
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              <div className="h-[2px] bg-gray-100 relative overflow-hidden">
+                <motion.div
+                  className="absolute inset-y-0 left-0 bg-accent"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${skill.level}%` }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 1.5,
+                    ease: "power2.out",
+                    delay: 0.2 + index * 0.1,
+                  }}
+                />
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* Soft Skills Cards */}
-        <motion.div
-          className="mt-16 grid sm:grid-cols-3 gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <div className="bg-gray-50 p-6 rounded-xl text-center hover:bg-gray-100 transition">
-            <h3 className="font-bold text-xl mb-2">Adaptable</h3>
-            <p className="text-gray-600 text-sm">
-              Quickly adjusts to new situations and challenges.
+          <div className="bg-light p-10 space-y-4 border-l-2 border-accent/20">
+            <h3 className="font-serif italic text-3xl">Adaptable</h3>
+            <p className="text-muted leading-relaxed font-light">
+              Quickly adjusts to new situations and challenges in high-pressure environments.
             </p>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-xl text-center hover:bg-gray-100 transition">
-            <h3 className="font-bold text-xl mb-2">Detail-Oriented</h3>
-            <p className="text-gray-600 text-sm">
-              Focused on quality and accuracy in all tasks.
+          <div className="bg-dark p-10 space-y-4 text-white">
+            <h3 className="font-serif italic text-3xl text-accent">Detail-Oriented</h3>
+            <p className="text-gray-400 leading-relaxed font-light">
+              Focused on quality and accuracy, ensuring every task meets highest professional standards.
             </p>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-xl text-center hover:bg-gray-100 transition">
-            <h3 className="font-bold text-xl mb-2">Empathetic</h3>
-            <p className="text-gray-600 text-sm">
-              Understands and supports people effectively.
+          <div className="bg-accent p-10 space-y-4 text-black md:col-span-2">
+            <h3 className="font-serif italic text-4xl font-bold italic tracking-tighter">Empathetic Leadership</h3>
+            <p className="text-black/80 text-lg leading-relaxed font-medium">
+              A deep commitment to supporting others, fostering positive team dynamics, and understanding diverse perspectives to drive better results.
             </p>
           </div>
         </motion.div>
       </div>
-    </PageTransition>
+    </div>
   );
 };
 
-export default SkillsPage;
+export default SkillsSection;

@@ -5,15 +5,22 @@ export default {
     extend: {
       colors: {
         accent: {
-          DEFAULT: "#D4A853",
-          hover: "#B88F41",
+          DEFAULT: "#d97706",
+          hover: "#b45309",
         },
         dark: "#111111",
+        light: "#FAF8F5",
+        muted: "#666666",
+        "muted-dark": "#333333",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
+        serif: ["Playfair Display", "serif"],
         heading: ["Poppins", "sans-serif"],
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      }
     },
   },
   plugins: [],
